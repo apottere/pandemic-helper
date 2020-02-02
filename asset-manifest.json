@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/pandemic-helper/static/css/main.d1b05096.chunk.css",
+    "main.js": "/pandemic-helper/static/js/main.0df640bb.chunk.js",
+    "main.js.map": "/pandemic-helper/static/js/main.0df640bb.chunk.js.map",
+    "runtime-main.js": "/pandemic-helper/static/js/runtime-main.9a139f6d.js",
+    "runtime-main.js.map": "/pandemic-helper/static/js/runtime-main.9a139f6d.js.map",
+    "static/js/2.5d487aa8.chunk.js": "/pandemic-helper/static/js/2.5d487aa8.chunk.js",
+    "static/js/2.5d487aa8.chunk.js.map": "/pandemic-helper/static/js/2.5d487aa8.chunk.js.map",
+    "index.html": "/pandemic-helper/index.html",
+    "precache-manifest.61fd9024a869ca9a891da1043c7b0384.js": "/pandemic-helper/precache-manifest.61fd9024a869ca9a891da1043c7b0384.js",
+    "service-worker.js": "/pandemic-helper/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/pandemic-helper/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.5d487aa8.chunk.js.LICENSE.txt": "/pandemic-helper/static/js/2.5d487aa8.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/pandemic-helper/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9a139f6d.js",
+    "static/js/2.5d487aa8.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.0df640bb.chunk.js"
+  ]
+}
