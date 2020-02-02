@@ -1,24 +1,24 @@
 import React from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-import { Navigation } from './nav';
 import { Infection } from './view/infection';
-import { Container } from 'react-bootstrap';
+import { Tab, Tabs } from 'react-bootstrap';
+import { useAppState } from './state';
 
-const history = createBrowserHistory();
 
-export const App = () => (
-    <HashRouter history={history}>
-        <Navigation />
-        <Container fluid>
-            <Switch>
-                <Route exact path="/infection">
-                    <Infection />
-                </Route>
-                <Route exact path="/player-cards">
-                    <div>todo</div>
-                </Route>
-            </Switch>
-        </Container>
-    </HashRouter>
-);
+export const App = () => {
+    const [navigation, setNavigation] = useAppState('navigation');
+    if(!navigation) {
+        setNavigation('/infection');
+        return (<></>);
+    }
+
+    return (
+        <Tabs id='navigation' activeKey={navigation} onSelect={k => setNavigation(k)}>
+            <Tab eventKey="/infection" title="Infection">
+                <Infection />
+            </Tab>
+            <Tab eventKey="/player-cards" title="Player Cards">
+                <div>todo</div>
+            </Tab>
+        </Tabs>
+    );
+};
