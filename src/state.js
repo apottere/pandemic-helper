@@ -21,7 +21,7 @@ export const AppStateProvider = ({children}) => {
     );
 };
 
-export const useAppState = (key, defaultValue) => {
+export const useAppState = (key, defaultValueFn) => {
     const [state, setState] = useContext(context);
     const updateHash = (obj) => {
         writeBrowserHash(obj);
@@ -43,5 +43,5 @@ export const useAppState = (key, defaultValue) => {
         updateHash(newState)
     };
 
-    return [actualState === undefined ? defaultValue : actualState, updateState]
+    return [actualState === undefined && defaultValueFn ? defaultValueFn() : actualState, updateState]
 };

@@ -1,0 +1,31 @@
+.infection-deck-section {
+    margin-top: 5px;
+}
+
+.infection-deck-section hr {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.infection-deck-card {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.infection-deck-card:last-child {
+    border-bottom: none;
+}
+
+.infection-deck-card.infection-group-blue {
+    background-color: rgba(52, 152, 219, 0.8);
+}
+.infection-deck-card.infection-group-red {
+    background-color: rgba(231, 76, 60, 0.7);
+}
+.infection-deck-card.infection-group-yellow {
+    background-color: rgba(241, 196, 15, 0.7);
+}
+.infection-deck-card.infection-group-black {
+    background-color: rgba(127, 140, 141, 0.8);
+}
