@@ -1,12 +1,20 @@
 import React from 'react';
-import { Infection } from './view/infection';
+import { Infection } from './tab/infection';
 import { Button, Container, Form, Nav } from 'react-bootstrap';
 import { useAppState } from './state';
 import './app.css';
+import { Initialize } from './config/init';
 
 
 export const App = () => {
     const [navigation, setNavigation] = useAppState('navigation');
+    const [game] = useAppState('game');
+    const [, setState] = useAppState();
+
+    if(!game && game !== 0) {
+        return (<Initialize />)
+    }
+
     if(!navigation) {
         setNavigation('/infection');
         return (<></>);
@@ -22,7 +30,7 @@ export const App = () => {
                     <Nav.Link eventKey='/player-cards'>Player Cards</Nav.Link>
                 </Nav.Item>
                 <Form inline className='nav-buttons'>
-                    <Button variant="danger">D</Button>
+                    <Button variant="danger" onClick={() => setState({})}>D</Button>
                 </Form>
             </Nav>
             <Container fluid className='main-content'>

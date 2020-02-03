@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, createContext, useContext, useState } from 'react';
 
 const readBrowserHash = () => {
     const hash = window.location.hash;
@@ -10,11 +10,21 @@ const readBrowserHash = () => {
 };
 const writeBrowserHash = (obj) => window.location.hash = Buffer.from(JSON.stringify(obj)).toString("base64");
 
-export const useAppState = (key, defaultValue) => {
+const context = createContext(undefined);
+
+export const AppStateProvider = ({children}) => {
     const [state, setState] = useState(readBrowserHash());
+    console.log(state);
+    const { Provider } = context;
+    return (
+        <Provider value={[state, setState]}>{children}</Provider>
+    );
+};
+
+export const useAppState = (key, defaultValue) => {
+    const [state, setState] = useContext(context);
     const updateHash = (obj) => {
         writeBrowserHash(obj);
-        setState(obj);
     };
 
     useEffect(() => {
@@ -33,5 +43,5 @@ export const useAppState = (key, defaultValue) => {
         updateHash(newState)
     };
 
-    return [actualState || defaultValue, updateState]
+    return [actualState === undefined ? defaultValue : actualState, updateState]
 };
