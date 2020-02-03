@@ -1,7 +1,8 @@
 import React from 'react';
 import { Infection } from './view/infection';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Button, Container, Form, Nav } from 'react-bootstrap';
 import { useAppState } from './state';
+import './app.css';
 
 
 export const App = () => {
@@ -12,13 +13,22 @@ export const App = () => {
     }
 
     return (
-        <Tabs id='navigation' activeKey={navigation} onSelect={k => setNavigation(k)}>
-            <Tab eventKey="/infection" title="Infection">
-                <Infection />
-            </Tab>
-            <Tab eventKey="/player-cards" title="Player Cards">
-                <div>todo</div>
-            </Tab>
-        </Tabs>
+        <>
+            <Nav variant="tabs" activeKey={navigation} onSelect={k => setNavigation(k)}>
+                <Nav.Item>
+                    <Nav.Link eventKey='/infection'>Infection</Nav.Link>
+                </Nav.Item>
+                <Nav.Item className='mr-auto'>
+                    <Nav.Link eventKey='/player-cards'>Player Cards</Nav.Link>
+                </Nav.Item>
+                <Form inline className='nav-buttons'>
+                    <Button variant="danger">D</Button>
+                </Form>
+            </Nav>
+            <Container fluid className='main-content'>
+                {navigation === '/infection' && <Infection />}
+                {navigation === '/player-cards' && <div>todo</div>}
+            </Container>
+        </>
     );
 };
