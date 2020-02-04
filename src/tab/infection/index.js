@@ -73,7 +73,7 @@ export const Infections = () => {
     console.log(deck);
 
     return (
-        <Container fluid className='main-content'>
+        <Container fluid className='infection-content'>
             {
                 deck.epidemics.slice(0).reverse().map((cards, i) => (
                     <DeckSection key={i} name={`Epidemic #${deck.epidemics.length - i}`} cities={cities} cards={cards} infect={infect} epidemic={epidemic} />
@@ -92,9 +92,8 @@ const DeckSection = ({ name, cities, cards, infect, epidemic }) => {
     }
 
     return (
-        <div className='infection-deck-section'>
-            <h4>{name}</h4>
-            <hr />
+        <div>
+            <h3 className='infection-deck-section-title'>{name}</h3>
             {Object.entries(cards).map(([id, count]) => (
                 <Card
                     key={id}

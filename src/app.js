@@ -19,12 +19,12 @@ export const App = () => {
     return (
         <>
             <Nav variant="tabs" activeKey={navigation} onSelect={k => setNavigation(k)}>
-                <Nav.Item>
-                    <Nav.Link eventKey='/infection'>Infection</Nav.Link>
-                </Nav.Item>
                 <Nav.Item className='mr-auto'>
-                    <Nav.Link eventKey='/player-cards'>Player Cards</Nav.Link>
+                    <Nav.Link eventKey='/infection'>Infection Deck</Nav.Link>
                 </Nav.Item>
+                {/*<Nav.Item className='mr-auto'>*/}
+                {/*    <Nav.Link eventKey='/player-cards'>Player Cards</Nav.Link>*/}
+                {/*</Nav.Item>*/}
                 <Form inline className='nav-buttons'>
                     <Button variant="outline-primary" onClick={() => window.history.back()}><SkipBackward size={24} /></Button>
                     <Button variant="outline-danger" onClick={() => setState({})}><Trash size={24} /></Button>
