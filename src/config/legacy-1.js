@@ -2,7 +2,6 @@ import React from 'react';
 import { SaveConfig } from './save';
 import { Form } from 'react-bootstrap';
 
-const epidemics = 5;
 const cities = [
     { name: 'Algiers', color: 'black', count: 1, },
     { name: 'Atlanta', color: 'blue', count: 1, },
@@ -54,11 +53,7 @@ const cities = [
     { name: 'Washington', color: 'blue', count: 1, },
 ];
 
-const initialState = {
-
-};
-
-const config = ({id}) => (
+const Config = ({id}) => (
     <>
         <Form.Group controlId='init.game-config'>
             <span className='text-muted'>No configuration options.</span>
@@ -69,6 +64,6 @@ const config = ({id}) => (
 
 export const Legacy1Game = {
     name: 'Legacy Season 1',
-    config,
+    Config,
     cities
 };

@@ -1,12 +1,25 @@
 import React from 'react';
 import { SaveConfig } from './save';
-import { Form } from 'react-bootstrap';
+import { useEpidemicCountFormField } from './form-fields';
 
-export const Legacy2Config = ({id}) => (
-    <>
-        <Form.Group controlId='init.game-config'>
-            <span className='text-muted'>No configuration options.</span>
-        </Form.Group>
-        <SaveConfig id={id} config={{}} />
-    </>
-);
+const cities = [
+];
+
+const Config = ({id}) => {
+    const [epidemics, EpidemicCount] = useEpidemicCountFormField(1, 20, 5);
+
+    return (
+        <>
+            <EpidemicCount />
+            <SaveConfig id={id} config={{
+                epidemics
+            }} />
+        </>
+    );
+};
+
+export const Legacy2Game = {
+    name: 'Legacy Season 2',
+    Config,
+    cities
+};

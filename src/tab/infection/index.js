@@ -3,7 +3,7 @@ import { Button, Container } from 'react-bootstrap';
 import { useAppState } from '../../state';
 import { AlertTriangle, CapslockFill } from 'react-bootstrap-icons';
 import './index.css';
-import { games } from '../../config/data';
+import { games } from '../../config';
 
 const createStartingDeck = (cities) => {
     const startingDeck = {

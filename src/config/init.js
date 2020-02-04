@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Container, Form } from 'react-bootstrap';
-import { games } from './data';
+import { games } from './index';
 
 export const Initialize = () => {
     const [selectedGame, setSelectedGame] = useState(0);
-    const GameConfig = games[selectedGame].config;
+    const GameConfig = games[selectedGame].Config;
 
     return (
         <Container fluid className='main-content'>
