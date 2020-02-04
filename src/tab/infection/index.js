@@ -30,8 +30,8 @@ const removeFromDeck = (id, ...sections) => {
     }
 };
 
-const removeFromTopOfDeck = (id, deck) => removeFromDeck(id, ...deck.epidemics, deck.unseen);
-const removeFromBottomOfDeck = (id, deck) => removeFromDeck(id, ...([...deck.epidemics, deck.unseen].reverse()));
+const removeFromTopOfDeck = (id, deck) => removeFromDeck(id, ...([deck.unseen, ...deck.epidemics].reverse()));
+const removeFromBottomOfDeck = (id, deck) => removeFromDeck(id, deck.unseen, ...deck.epidemics);
 const addCard = (id, section) => {
     if(!section[id]) {
         section[id] = 0;
@@ -60,7 +60,7 @@ export const Infections = () => {
         removeFromBottomOfDeck(id, deck);
         addCard(id, deck.discard);
         deck.epidemics.push(deck.discard);
-        deck.discard = [];
+        deck.discard = {};
         setDeck(deck);
     };
 
@@ -70,11 +70,13 @@ export const Infections = () => {
         setDeck(deck);
     };
 
+    console.log(deck);
+
     return (
         <Container fluid className='main-content'>
             {
-                deck.epidemics.map((cards, i) => (
-                    <DeckSection key={i} name={`Epidemic #${i + 1}`} cities={cities} cards={cards} infect={infect} epidemic={epidemic} />
+                deck.epidemics.slice(0).reverse().map((cards, i) => (
+                    <DeckSection key={i} name={`Epidemic #${deck.epidemics.length - i}`} cities={cities} cards={cards} infect={infect} epidemic={epidemic} />
                 ))
             }
             <DeckSection name='Deck' cities={cities} cards={deck.unseen} infect={infect} epidemic={epidemic} />
