@@ -79,7 +79,7 @@ export const Infections = () => {
                     <DeckSection key={i} name={`Epidemic #${deck.epidemics.length - i}`} cities={cities} cards={cards} infect={infect} epidemic={epidemic} />
                 ))
             }
-            <DeckSection name='Deck' cities={cities} cards={deck.unseen} infect={infect} epidemic={epidemic} />
+            <DeckSection name='Main Deck' cities={cities} cards={deck.unseen} infect={infect} epidemic={epidemic} />
             <DeckSection name='Discard' cities={cities} cards={deck.discard} />
             <DeckSection name='Removed from Play' cities={cities} cards={deck.removed} />
         </Container>
@@ -92,7 +92,7 @@ const DeckSection = ({ name, cities, cards, infect, epidemic }) => {
     }
 
     return (
-        <div>
+        <div className='infection-deck-section'>
             <h3 className='infection-deck-section-title'>{name}</h3>
             {Object.entries(cards).map(([id, count]) => (
                 <Card
