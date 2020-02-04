@@ -115,7 +115,7 @@ const Card = ({ id, city, count, infect, epidemic }) => {
     return (
         <div className={`d-flex infection-deck-card infection-group-${color}`}>
             <span className='mr-auto p-2'>{name}</span>
-            <span className='p-2'>[{count}/{total}]</span>
+            <span className='p-2'><span>{count}</span><span className='text-muted'> / </span><span className='text-muted'>{total}</span></span>
             { epidemic && <span className='p-2'><Button variant='success' size='xs' onClick={() => epidemic(id)}><AlertTriangle size={18} /></Button></span> }
             { infect && <span className='p-2'><Button size='xs' onClick={() => infect(id)}><CapslockFill size={18} /></Button></span> }
         </div>
