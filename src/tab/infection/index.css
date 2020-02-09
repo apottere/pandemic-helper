@@ -36,3 +36,17 @@
 .infection-deck-card.infection-group-black {
     background-color: rgba(127, 140, 141, 0.8);
 }
+
+.infection-deck-card-extra {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.infection-deck-card-extra > button {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.infection-extra-button {
+    width: 100%;
+    margin-top: 10px;
+}

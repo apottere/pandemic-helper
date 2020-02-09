@@ -1,7 +1,7 @@
-import React from 'react';
-import { Button, Container } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Container, Modal } from 'react-bootstrap';
 import { useAppState } from '../../state';
-import { AlertTriangle, CapslockFill } from 'react-bootstrap-icons';
+import { AlertTriangle, CapslockFill, ThreeDotsVertical, TrashFill, ArrowClockwise } from 'react-bootstrap-icons';
 import './index.css';
 import { games } from '../../config';
 
@@ -99,7 +99,7 @@ export const Infections = () => {
         removed: {},
     }));
 
-    const { explodedDeck: actualDeck, missingSection } = explodeDeck(deck, cities);
+    const { explodedDeck, missingSection } = explodeDeck(deck, cities);
 
     const infect = (id) => {
         removeFromTopOfDeck(id, missingSection, deck.epidemics);
@@ -115,52 +115,60 @@ export const Infections = () => {
         setDeck(deck);
     };
 
-    const remove = (id, section) => {
-        removeFromDeck(id, section);
+    const remove = (section) => (id) => {
+        removeFromSection(id, section);
         addCard(id, deck.removed);
+        setDeck(deck);
+    };
+
+    const unremove = (id) => {
+        removeFromSection(id, deck.removed);
         setDeck(deck);
     };
 
     return (
         <Container fluid className='infection-content'>
             {
-                actualDeck.epidemics.map((cards, i) => (
+                explodedDeck.epidemics.map((cards, i) => (
                     <DeckSection
                         key={i}
-                        name={`Epidemic #${actualDeck.epidemics.length - i}`}
+                        name={`Epidemic #${explodedDeck.epidemics.length - i}`}
                         cards={cards}
                         infect={infect}
                         epidemic={epidemic}
-                        remove={remove}
+                        remove={remove(deck.epidemics[(deck.epidemics.length - 1) - i])}
                         showEpidemic={false}
-                        showDraw={actualDeck.epidemics.slice(0, i).flatMap(e => e).length === 0}
+                        showDraw={explodedDeck.epidemics.slice(0, i).flatMap(e => e).length === 0}
                     />
                 ))
             }
             <DeckSection
                 name='Main Deck'
                 cities={cities}
-                cards={actualDeck.unseen}
+                cards={explodedDeck.unseen}
                 infect={infect}
                 epidemic={epidemic}
+                remove={remove(missingSection)}
                 showEpidemic={true}
-                showDraw={actualDeck.epidemics.flatMap(e => e).length === 0}
+                showDraw={explodedDeck.epidemics.flatMap(e => e).length === 0}
             />
             <DeckSection
                 name='Discard'
                 cities={cities}
-                cards={actualDeck.discard}
+                cards={explodedDeck.discard}
+                remove={remove(deck.discard)}
             />
             <DeckSection
                 name='Removed from Play'
                 cities={cities}
-                cards={actualDeck.removed}
+                cards={explodedDeck.removed}
+                unremove={unremove}
             />
         </Container>
     );
 };
 
-const DeckSection = ({ name, cards, infect, epidemic, remove, showEpidemic, showDraw }) => {
+const DeckSection = ({ name, cards, infect, epidemic, remove, unremove, showEpidemic, showDraw }) => {
     if(!cards || cards.length <= 0) {
         return (<></>);
     }
@@ -175,6 +183,7 @@ const DeckSection = ({ name, cards, infect, epidemic, remove, showEpidemic, show
                     infect={infect}
                     epidemic={epidemic}
                     remove={remove}
+                    unremove={unremove}
                     showEpidemic={showEpidemic}
                     showDraw={showDraw}
                 />
@@ -183,16 +192,56 @@ const DeckSection = ({ name, cards, infect, epidemic, remove, showEpidemic, show
     )
 };
 
-const Card = ({ card, infect, epidemic, showEpidemic, showDraw }) => {
+const Card = ({ card, infect, epidemic, remove, unremove, showEpidemic, showDraw }) => {
+    const [showModal, setShowModal] = useState(false);
+    const handleCloseModal = () => setShowModal(false);
+    const handleShowModal = () => setShowModal(true);
+
     const { city, id, count } = card;
     const { color, name, count: total } = city;
 
+    const closeWithAction = (fn) => () => {
+        handleCloseModal();
+        fn(id);
+    };
+
+    const modalButtons = [];
+    if(epidemic && !showEpidemic) {
+        modalButtons.push((<Button className='infection-extra-button' size='lg' variant='success' onClick={closeWithAction(epidemic)}><AlertTriangle size={26} /> Force Epidemic</Button>))
+    }
+    if(infect && !showDraw) {
+        modalButtons.push((<Button className='infection-extra-button' size='lg' variant='primary' onClick={closeWithAction(infect)}><CapslockFill size={26} /> Force Draw</Button>))
+    }
+    if(remove) {
+        modalButtons.push((<Button className='infection-extra-button' size='lg' variant='danger' onClick={closeWithAction(remove)}><TrashFill size={26} /> Remove from Play</Button>))
+    }
+    if(unremove) {
+        modalButtons.push((<Button className='infection-extra-button' size='lg' variant='primary' onClick={closeWithAction(unremove)}><ArrowClockwise size={26} /> Return to Play</Button>))
+    }
+
+    const hasModalButtons = modalButtons.length !== 0;
+    const nameSection = (<span className='mr-auto p-2'>{name}</span>);
+    const countSection = (<span className='p-2'><span>{count}</span><span className='text-muted'> / </span><span className='text-muted'>{total}</span></span>);
+
     return (
         <div className={`d-flex infection-deck-card infection-group-${color}`}>
-            <span className='mr-auto p-2'>{name}</span>
-            <span className='p-2'><span>{count}</span><span className='text-muted'> / </span><span className='text-muted'>{total}</span></span>
+            {nameSection}
+            {countSection}
             { showEpidemic && epidemic && <span className='p-2'><Button variant='success' size='xs' onClick={() => epidemic(id)}><AlertTriangle size={18} /></Button></span> }
             { showDraw && infect && <span className='p-2'><Button size='xs' onClick={() => infect(id)}><CapslockFill size={18} /></Button></span> }
+            { hasModalButtons && <span className='p-2 infection-deck-card-extra'><Button variant='secondary-outline' size='xs' onClick={handleShowModal}><ThreeDotsVertical size={18} /></Button></span> }
+            { hasModalButtons && <Modal show={hasModalButtons && showModal} onHide={handleCloseModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Additional Actions</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className={`d-flex infection-deck-card infection-group-${color}`}>
+                        {nameSection}
+                        {countSection}
+                    </div>
+                    { modalButtons.map((button, i) => (<div key={i}>{button}</div>)) }
+                </Modal.Body>
+            </Modal> }
         </div>
     );
 };
