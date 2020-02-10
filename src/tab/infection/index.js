@@ -1,12 +1,29 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { useAppState } from '../../state';
-import './index.css';
 import { games } from '../../config';
 import { Card } from './card';
 import { addCard, explodeDeck, removeFromBottomOfDeck, removeFromSection, removeFromTopOfDeck } from './deck-utils';
+import { createUseStyles } from 'react-jss';
+
+const useStyles = createUseStyles({
+    content: {
+        padding: '5px 0 0'
+    },
+    section: {
+        '&:first-child $sectionTitle': {
+            paddingTop: '15px'
+        }
+    },
+    sectionTitle: {
+        padding: '25px 15px',
+        margin: 0,
+        borderBottom: '3px solid #5f5f5f'
+    }
+});
 
 export const Infections = () => {
+    const styles = useStyles();
     const [game] = useAppState('game');
     const cities = games[game].cities;
     const [deck, setDeck] = useAppState('infectionDeck', () => ({
@@ -43,7 +60,7 @@ export const Infections = () => {
     };
 
     return (
-        <Container fluid className='infection-content'>
+        <Container fluid className={styles.content}>
             {
                 explodedDeck.epidemics.map((cards, i) => (
                     <DeckSection
@@ -85,13 +102,14 @@ export const Infections = () => {
 };
 
 const DeckSection = ({ name, cards, infect, epidemic, remove, unremove, showEpidemic, showDraw }) => {
+    const styles = useStyles();
     if(!cards || cards.length <= 0) {
         return (<></>);
     }
 
     return (
-        <div className='infection-deck-section'>
-            <h3 className='infection-deck-section-title'>{name}</h3>
+        <div className={styles.section}>
+            <h3 className={styles.sectionTitle}>{name}</h3>
             {cards.map((card, i) => (
                 <Card
                     key={i}
