@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pandemic-helper/static/css/main.a5eb1192.chunk.css",
-    "main.js": "/pandemic-helper/static/js/main.f856cbee.chunk.js",
-    "main.js.map": "/pandemic-helper/static/js/main.f856cbee.chunk.js.map",
+    "main.js": "/pandemic-helper/static/js/main.5f1de79c.chunk.js",
+    "main.js.map": "/pandemic-helper/static/js/main.5f1de79c.chunk.js.map",
     "runtime-main.js": "/pandemic-helper/static/js/runtime-main.9a139f6d.js",
     "runtime-main.js.map": "/pandemic-helper/static/js/runtime-main.9a139f6d.js.map",
     "static/css/2.67123b20.chunk.css": "/pandemic-helper/static/css/2.67123b20.chunk.css",
     "static/js/2.10303ddb.chunk.js": "/pandemic-helper/static/js/2.10303ddb.chunk.js",
     "static/js/2.10303ddb.chunk.js.map": "/pandemic-helper/static/js/2.10303ddb.chunk.js.map",
     "index.html": "/pandemic-helper/index.html",
-    "precache-manifest.acd991e1b0eb4f732cc726ec5b955414.js": "/pandemic-helper/precache-manifest.acd991e1b0eb4f732cc726ec5b955414.js",
+    "precache-manifest.40cde90078c3529dc0f3bd4f6c35fdc4.js": "/pandemic-helper/precache-manifest.40cde90078c3529dc0f3bd4f6c35fdc4.js",
     "service-worker.js": "/pandemic-helper/service-worker.js",
     "static/css/2.67123b20.chunk.css.map": "/pandemic-helper/static/css/2.67123b20.chunk.css.map",
     "static/css/main.a5eb1192.chunk.css.map": "/pandemic-helper/static/css/main.a5eb1192.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.67123b20.chunk.css",
     "static/js/2.10303ddb.chunk.js",
     "static/css/main.a5eb1192.chunk.css",
-    "static/js/main.f856cbee.chunk.js"
+    "static/js/main.5f1de79c.chunk.js"
   ]
 }
