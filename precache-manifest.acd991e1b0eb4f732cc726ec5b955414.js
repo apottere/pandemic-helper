@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f56995df95689cf27308af89bc975206",
+    "revision": "547bed86d34d8e8f2afa5ced64dbd2a6",
     "url": "/pandemic-helper/index.html"
   },
   {
-    "revision": "aa3c6bad7eb4e4dba35a",
+    "revision": "0ac1ee1328df7da61c97",
     "url": "/pandemic-helper/static/css/2.67123b20.chunk.css"
   },
   {
-    "revision": "558fd434976ccfa6c8f8",
+    "revision": "589c797e85f81afe8869",
     "url": "/pandemic-helper/static/css/main.a5eb1192.chunk.css"
   },
   {
-    "revision": "aa3c6bad7eb4e4dba35a",
-    "url": "/pandemic-helper/static/js/2.89de87e3.chunk.js"
+    "revision": "0ac1ee1328df7da61c97",
+    "url": "/pandemic-helper/static/js/2.10303ddb.chunk.js"
   },
   {
     "revision": "3a75fa42535f82ecbc939caa25e1f4a0",
-    "url": "/pandemic-helper/static/js/2.89de87e3.chunk.js.LICENSE.txt"
+    "url": "/pandemic-helper/static/js/2.10303ddb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "558fd434976ccfa6c8f8",
-    "url": "/pandemic-helper/static/js/main.af6617d8.chunk.js"
+    "revision": "589c797e85f81afe8869",
+    "url": "/pandemic-helper/static/js/main.f856cbee.chunk.js"
   },
   {
     "revision": "4add3a89bbef605e04d4",
