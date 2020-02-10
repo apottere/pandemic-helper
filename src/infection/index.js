@@ -1,40 +1,20 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { useAppState } from '../../state';
-import { games } from '../../config';
+import { useAppState } from '../state';
+import { games } from '../config';
 import { Card } from './card';
 import { addCard, explodeDeck, removeFromBottomOfDeck, removeFromSection, removeFromTopOfDeck } from './deck-utils';
 import { createUseStyles } from 'react-jss';
-import { AlertTriangle, CapslockFill } from 'react-bootstrap-icons';
+import { Footer, footerHeight } from './footer';
 
-const toastHeight = '60px';
 const useStyles = createUseStyles({
     content: {
-        padding: `calc(56px) 0 ${toastHeight} 0`
+        padding: `0 0 ${footerHeight} 0`
     },
     sectionTitle: {
         padding: '25px 15px',
         margin: 0,
         borderBottom: '1px solid #5f5f5f'
-    },
-    toast: {
-        backgroundColor: '#f3f3f3',
-        height: toastHeight,
-        lineHeight: toastHeight,
-        textAlign: 'center',
-        fontSize: '20px',
-        boxSizing: 'border-box',
-        borderTop: '1px solid #5f5f5f',
-        position: 'fixed',
-        bottom: 0,
-        width: '100%',
-
-        '& > span': {
-            padding: '0 20px',
-            '& > svg': {
-                marginBottom: '1px'
-            }
-        }
     }
 });
 
@@ -115,11 +95,7 @@ export const Infections = () => {
                     unremove={unremove}
                 />
             </Container>
-            <div className={styles.toast}>
-                <span className='text-muted'><CapslockFill size={20} /> Infect</span>
-                |
-                <span className='text-muted'><AlertTriangle size={20} /> Epidemic</span>
-            </div>
+            <Footer />
         </>
     );
 };
