@@ -29,7 +29,7 @@ export const App = () => {
 
     return (
         <>
-            <Navbar className={styles.nav}>
+            <Navbar className={styles.nav} fixed='top'>
                 <Navbar.Brand className='mr-auto'>Pandemic Helper</Navbar.Brand>
                 <Form inline className={styles.navButtons}>
                     <Button variant="outline-primary" onClick={() => window.history.back()}><SkipBackward size={24} /></Button>

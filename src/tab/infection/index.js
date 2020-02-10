@@ -10,21 +10,14 @@ import { AlertTriangle, CapslockFill } from 'react-bootstrap-icons';
 const toastHeight = '60px';
 const useStyles = createUseStyles({
     content: {
-        padding: '5px 0 0',
-        height: `calc(100vh - (56px + ${toastHeight}))`,
-        overflowY: 'scroll'
-    },
-    section: {
-        '&:first-child $sectionTitle': {
-            paddingTop: '15px'
-        }
+        padding: `calc(56px) 0 ${toastHeight} 0`
     },
     sectionTitle: {
         padding: '25px 15px',
         margin: 0,
         borderBottom: '1px solid #5f5f5f'
     },
-    key: {
+    toast: {
         backgroundColor: '#f3f3f3',
         height: toastHeight,
         lineHeight: toastHeight,
@@ -32,6 +25,9 @@ const useStyles = createUseStyles({
         fontSize: '20px',
         boxSizing: 'border-box',
         borderTop: '1px solid #5f5f5f',
+        position: 'fixed',
+        bottom: 0,
+        width: '100%',
 
         '& > span': {
             padding: '0 20px',
@@ -119,7 +115,7 @@ export const Infections = () => {
                     unremove={unremove}
                 />
             </Container>
-            <div className={styles.key}>
+            <div className={styles.toast}>
                 <span className='text-muted'><CapslockFill size={20} /> Infect</span>
                 |
                 <span className='text-muted'><AlertTriangle size={20} /> Epidemic</span>
@@ -135,7 +131,7 @@ const DeckSection = ({ name, cards, infect, epidemic, remove, unremove, showEpid
     }
 
     return (
-        <div className={styles.section}>
+        <div>
             <h3 className={styles.sectionTitle}>{name}</h3>
             {cards.map((card, i) => (
                 <Card
