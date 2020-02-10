@@ -25,7 +25,6 @@ const useStyles = createUseStyles({
     },
     extra: {
         paddingLeft: '0 !important',
-        paddingRight: '0 !important',
         '& button': {
             paddingLeft: '0 !important',
             paddingRight: '0 !important',
