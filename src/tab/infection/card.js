@@ -53,17 +53,17 @@ export const Card = ({ card, infect, epidemic, remove, unremove, showEpidemic, s
     };
 
     const modalButtons = [];
-    if(epidemic && !showEpidemic) {
-        modalButtons.push((
-            <Button className={styles.extraModalButton} size='lg' variant='success' onClick={closeWithAction(epidemic)}>
-                <AlertTriangle size={26}/> Force Epidemic
-            </Button>
-        ))
-    }
     if(infect && !showDraw) {
         modalButtons.push((
             <Button className={styles.extraModalButton} size='lg' variant='primary' onClick={closeWithAction(infect)}>
                 <CapslockFill size={26}/> Force Draw
+            </Button>
+        ))
+    }
+    if(epidemic && !showEpidemic) {
+        modalButtons.push((
+            <Button className={styles.extraModalButton} size='lg' variant='success' onClick={closeWithAction(epidemic)}>
+                <AlertTriangle size={26}/> Force Epidemic
             </Button>
         ))
     }
@@ -92,11 +92,11 @@ export const Card = ({ card, infect, epidemic, remove, unremove, showEpidemic, s
         <div className={`d-flex ${styles.card}`}>
             {nameSection}
             {countSection}
-            {showEpidemic && epidemic && <span className='p-2'>
-                <Button variant='success' size='xs' onClick={() => epidemic(id)}><AlertTriangle size={18}/></Button>
-            </span>}
             {showDraw && infect && <span className='p-2'>
                 <Button size='xs' onClick={() => infect(id)}><CapslockFill size={18}/></Button>
+            </span>}
+            {showEpidemic && epidemic && <span className='p-2'>
+                <Button variant='success' size='xs' onClick={() => epidemic(id)}><AlertTriangle size={18}/></Button>
             </span>}
             {hasModalButtons && <span className={`p-2 ${styles.extra}`}>
                 <Button variant='secondary-outline' size='xs' onClick={handleShowModal}>

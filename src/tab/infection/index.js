@@ -5,10 +5,14 @@ import { games } from '../../config';
 import { Card } from './card';
 import { addCard, explodeDeck, removeFromBottomOfDeck, removeFromSection, removeFromTopOfDeck } from './deck-utils';
 import { createUseStyles } from 'react-jss';
+import { AlertTriangle, CapslockFill } from 'react-bootstrap-icons';
 
+const toastHeight = '60px';
 const useStyles = createUseStyles({
     content: {
-        padding: '5px 0 0'
+        padding: '5px 0 0',
+        height: `calc(100vh - (42px + ${toastHeight}))`,
+        overflowY: 'scroll'
     },
     section: {
         '&:first-child $sectionTitle': {
@@ -19,6 +23,21 @@ const useStyles = createUseStyles({
         padding: '25px 15px',
         margin: 0,
         borderBottom: '3px solid #5f5f5f'
+    },
+    key: {
+        height: toastHeight,
+        lineHeight: toastHeight,
+        textAlign: 'center',
+        fontSize: '20px',
+        boxSizing: 'border-box',
+        borderTop: '1px solid #5f5f5f',
+
+        '& > span': {
+            padding: '0 20px',
+            '& > svg': {
+                marginBottom: '1px'
+            }
+        }
     }
 });
 
@@ -60,44 +79,51 @@ export const Infections = () => {
     };
 
     return (
-        <Container fluid className={styles.content}>
-            {
-                explodedDeck.epidemics.map((cards, i) => (
-                    <DeckSection
-                        key={i}
-                        name={`Epidemic #${explodedDeck.epidemics.length - i}`}
-                        cards={cards}
-                        infect={infect}
-                        epidemic={epidemic}
-                        remove={remove(deck.epidemics[(deck.epidemics.length - 1) - i])}
-                        showEpidemic={false}
-                        showDraw={explodedDeck.epidemics.slice(0, i).flatMap(e => e).length === 0}
-                    />
-                ))
-            }
-            <DeckSection
-                name='Main Deck'
-                cities={cities}
-                cards={explodedDeck.unseen}
-                infect={infect}
-                epidemic={epidemic}
-                remove={remove(missingSection)}
-                showEpidemic={true}
-                showDraw={explodedDeck.epidemics.flatMap(e => e).length === 0}
-            />
-            <DeckSection
-                name='Discard'
-                cities={cities}
-                cards={explodedDeck.discard}
-                remove={remove(deck.discard)}
-            />
-            <DeckSection
-                name='Removed from Play'
-                cities={cities}
-                cards={explodedDeck.removed}
-                unremove={unremove}
-            />
-        </Container>
+        <>
+            <Container fluid className={styles.content}>
+                {
+                    explodedDeck.epidemics.map((cards, i) => (
+                        <DeckSection
+                            key={i}
+                            name={`Epidemic #${explodedDeck.epidemics.length - i}`}
+                            cards={cards}
+                            infect={infect}
+                            epidemic={epidemic}
+                            remove={remove(deck.epidemics[(deck.epidemics.length - 1) - i])}
+                            showEpidemic={false}
+                            showDraw={explodedDeck.epidemics.slice(0, i).flatMap(e => e).length === 0}
+                        />
+                    ))
+                }
+                <DeckSection
+                    name='Main Deck'
+                    cities={cities}
+                    cards={explodedDeck.unseen}
+                    infect={infect}
+                    epidemic={epidemic}
+                    remove={remove(missingSection)}
+                    showEpidemic={true}
+                    showDraw={explodedDeck.epidemics.flatMap(e => e).length === 0}
+                />
+                <DeckSection
+                    name='Discard'
+                    cities={cities}
+                    cards={explodedDeck.discard}
+                    remove={remove(deck.discard)}
+                />
+                <DeckSection
+                    name='Removed from Play'
+                    cities={cities}
+                    cards={explodedDeck.removed}
+                    unremove={unremove}
+                />
+            </Container>
+            <div className={styles.key}>
+                <span className='text-muted'><CapslockFill size={20} /> Infect</span>
+                |
+                <span className='text-muted'><AlertTriangle size={20} /> Epidemic</span>
+            </div>
+        </>
     );
 };
 
