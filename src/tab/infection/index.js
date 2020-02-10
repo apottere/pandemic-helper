@@ -11,7 +11,7 @@ const toastHeight = '60px';
 const useStyles = createUseStyles({
     content: {
         padding: '5px 0 0',
-        height: `calc(100vh - (42px + ${toastHeight}))`,
+        height: `calc(100vh - (56px + ${toastHeight}))`,
         overflowY: 'scroll'
     },
     section: {
@@ -22,9 +22,10 @@ const useStyles = createUseStyles({
     sectionTitle: {
         padding: '25px 15px',
         margin: 0,
-        borderBottom: '3px solid #5f5f5f'
+        borderBottom: '1px solid #5f5f5f'
     },
     key: {
+        backgroundColor: '#f3f3f3',
         height: toastHeight,
         lineHeight: toastHeight,
         textAlign: 'center',

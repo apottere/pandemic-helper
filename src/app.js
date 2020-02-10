@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Infections } from './tab/infection';
-import { Button, Form, Nav } from 'react-bootstrap';
+import { Button, Form, Navbar } from 'react-bootstrap';
 import { useAppState } from './state';
 import { Initialize } from './config/init';
-import { Trash, SkipBackward } from 'react-bootstrap-icons';
+import { SkipBackward, Trash } from 'react-bootstrap-icons';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
+    nav: {
+        borderBottom: '1px solid #5f5f5f',
+        backgroundColor: '#f3f3f3',
+    },
     navButtons: {
         '& button': {
             marginRight: '3px'
@@ -16,7 +20,6 @@ const useStyles = createUseStyles({
 
 export const App = () => {
     const styles = useStyles();
-    const [navigation, setNavigation] = useState('/infection');
     const [game] = useAppState('game');
     const [, setState] = useAppState();
 
@@ -26,20 +29,14 @@ export const App = () => {
 
     return (
         <>
-            <Nav variant="tabs" activeKey={navigation} onSelect={k => setNavigation(k)}>
-                <Nav.Item className='mr-auto'>
-                    <Nav.Link eventKey='/infection'>Infection Deck</Nav.Link>
-                </Nav.Item>
-                {/*<Nav.Item className='mr-auto'>*/}
-                {/*    <Nav.Link eventKey='/player-cards'>Player Cards</Nav.Link>*/}
-                {/*</Nav.Item>*/}
+            <Navbar className={styles.nav}>
+                <Navbar.Brand className='mr-auto'>Pandemic Helper</Navbar.Brand>
                 <Form inline className={styles.navButtons}>
                     <Button variant="outline-primary" onClick={() => window.history.back()}><SkipBackward size={24} /></Button>
                     <Button variant="outline-danger" onClick={() => setState({})}><Trash size={24} /></Button>
                 </Form>
-            </Nav>
-            {navigation === '/infection' && <Infections />}
-            {navigation === '/player-cards' && <div>todo</div>}
+            </Navbar>
+            <Infections />
         </>
     );
 };
