@@ -1,8 +1,9 @@
 import React from 'react';
 import { SaveConfig } from './save';
 import { Form } from 'react-bootstrap';
+import { usePlayerCountFormField } from './form-fields';
 
-const cities = [
+const cities = () => [
     { name: 'Algiers', color: 'black', count: 1, },
     { name: 'Atlanta', color: 'blue', count: 1, },
     { name: 'Baghdad', color: 'black', count: 1, },
@@ -53,14 +54,21 @@ const cities = [
     { name: 'Washington', color: 'blue', count: 1, },
 ];
 
-const Config = ({id}) => (
-    <>
-        <Form.Group controlId='init.game-config'>
-            <span className='text-muted'>No configuration options.</span>
-        </Form.Group>
-        <SaveConfig id={id} config={{}} />
-    </>
-);
+const Config = ({id}) => {
+    const [players, PlayerCount] = usePlayerCountFormField();
+
+    return (
+        <>
+            <PlayerCount />
+            <Form.Group controlId='init.game-config'>
+                <span className='text-muted'>No configuration options.</span>
+            </Form.Group>
+            <SaveConfig id={id} config={{
+                players
+            }} />
+        </>
+    );
+};
 
 export const Legacy1Game = {
     name: 'Legacy Season 1',

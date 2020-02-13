@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 import { useAppState } from '../state';
-import { SkipBackward, SkipForward, Trash } from 'react-bootstrap-icons';
+import { SkipBackward, SkipForward, Trash, BootstrapReboot } from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
 import React from 'react';
 
@@ -31,13 +31,19 @@ const useStyles = createUseStyles({
 });
 
 export const Footer = () => {
-    const [, setState] = useAppState();
+    const [state, setState] = useAppState();
     const styles = useStyles();
+
+    const reset = () => setState({
+        game: state.game,
+        config: state.config
+    });
 
     return (
         <div className={`d-flex ${styles.footer}`}>
             <span className={styles.buttons}>
                 <Button variant="outline-primary" onClick={() => window.history.back()}><SkipBackward size={24} /></Button>
+                <Button variant="outline-secondary" onClick={reset}><BootstrapReboot size={24} /></Button>
                 <Button variant="outline-danger" onClick={() => setState({})}><Trash size={24} /></Button>
                 <Button variant="outline-primary" onClick={() => window.history.forward()}><SkipForward size={24} /></Button>
             </span>

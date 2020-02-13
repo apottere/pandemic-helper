@@ -21,7 +21,8 @@ const useStyles = createUseStyles({
 export const Infections = () => {
     const styles = useStyles();
     const [game] = useAppState('game');
-    const cities = games[game].cities;
+    const [config] = useAppState('config');
+    const cities = games[game].cities(config);
     const [deck, setDeck] = useAppState('infectionDeck', () => ({
         epidemics: [],
         discard: {},

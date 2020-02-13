@@ -83,8 +83,8 @@ export const Card = ({ card, infect, epidemic, remove, unremove, showEpidemic, s
 
     const hasModalButtons = modalButtons.length !== 0;
     const nameSection = (<span className='mr-auto p-2'>{name}</span>);
-    const countSection = (<span className='p-2'>
-        <span>{count}</span><span className='text-muted'> / </span><span className='text-muted'>{total}</span>
+    const countSection = (<span className='p-2 text-monospace'>
+        <span>{count}</span><span className='text-muted text-monospace'>/</span><span className='text-muted text-monospace'>{total}</span>
     </span>);
 
     return (

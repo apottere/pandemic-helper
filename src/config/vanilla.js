@@ -1,8 +1,8 @@
 import React from 'react';
 import { SaveConfig } from './save';
-import { useEpidemicCountFormField } from './form-fields';
+import { useEpidemicCountFormField, usePlayerCountFormField } from './form-fields';
 
-const cities = [
+const cities = () => [
     { name: 'Algiers', color: 'black', count: 1, },
     { name: 'Atlanta', color: 'blue', count: 1, },
     { name: 'Baghdad', color: 'black', count: 1, },
@@ -54,12 +54,15 @@ const cities = [
 ];
 
 const Config = ({id}) => {
+    const [players, PlayerCount] = usePlayerCountFormField();
     const [epidemics, EpidemicCount] = useEpidemicCountFormField(4, 6, 5);
 
     return (
         <>
+            <PlayerCount />
             <EpidemicCount />
             <SaveConfig id={id} config={{
+                players,
                 epidemics
             }} />
         </>
