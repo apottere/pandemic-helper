@@ -27,7 +27,7 @@ const explodeSection = (cities, seen, deckSection) => {
         const first = seen ? countInSection(id, seen) === 0 : false;
         section.push(explodeCard(id, count, first, cities[id]));
         if(seen) {
-            addToSection(id, seen);
+            addToSection(id, seen, count);
         }
     });
 

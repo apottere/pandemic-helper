@@ -34,7 +34,9 @@ export const Infections = () => {
     const infect = (id) => {
         removeFromTopOfDeck(id, missingSection, deck.epidemics);
         addCard(id, deck.discard);
-        setDeck(deck);
+        setDeck({
+            ...deck
+        });
     };
 
     const epidemic = (id) => {
@@ -42,7 +44,9 @@ export const Infections = () => {
         addCard(id, deck.discard);
         deck.epidemics.push(deck.discard);
         deck.discard = {};
-        setDeck(deck);
+        setDeck({
+            ...deck
+        });
     };
 
     const remove = (section) => (id) => {
